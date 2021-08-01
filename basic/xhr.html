@@ -13,7 +13,10 @@
       var response = document.getElementById("response");
       var syncBtn = document.getElementById("syncBtn");
       syncBtn.addEventListener("click", function () {
-        // 同步
+        // 同步請求，等待期間無法做其他動作
+
+        response.innerText = "開始同步請求";
+
         var xhr = new XMLHttpRequest();
         xhr.onload = function () {
           if (this.status === 200) {
@@ -22,13 +25,20 @@
             response.innerHTML = `同步請求錯誤: ${this.status}`;
           }
         };
+
+        // method, url, async(default: true 非同步)
+        // 同步: false
+        // 非同步(異步): true
         xhr.open("GET", "http://18.237.113.31:3000/", false);
         xhr.send();
       });
 
       var asyncBtn = document.getElementById("asyncBtn");
       asyncBtn.addEventListener("click", function () {
-        // 非同步
+        // 非同步請求，等待期間還是可以執行其他工作
+
+        response.innerText = "開始非同步請求";
+
         var xhr = new XMLHttpRequest();
         xhr.onload = function () {
           if (this.status === 200) {
@@ -37,6 +47,10 @@
             response.innerHTML = `非同步請求錯誤: ${this.status}`;
           }
         };
+
+        // method, url, async(default: true 非同步)
+        // 同步: false
+        // 非同步(異步): true
         xhr.open("GET", "http://18.237.113.31:3000/", true);
         xhr.send();
       });
