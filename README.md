@@ -9,18 +9,6 @@ date: 2021/7/31~2021/8/1
 * 如何執行node.js
 * 同步與非同步 XMLHttpRequest
 
-老師: Ashley (小賴)
-ashleylai58@gmail.com
-
-共筆: https://hackmd.io/GRRTV8KwSwe_iZfTatZVeQ
-
-作業: https://docs.google.com/spreadsheets/d/1A-SYD-nQ0hME5VCdPImmWoz4SlZu7Gh0mMIPMEvCADE/edit?usp=sharing
-
-錄影檔: https://drive.google.com/drive/folders/1wz1LctMmE4IlXWii6730f9RVkaGZj5fz?usp=sharing
-
-第一週問卷調查: https://forms.gle/TzvZbedcDiNDvXPN9
-8/1 測驗: https://forms.gle/MmvtoSF653suRiFH7
-
 ---
  
 ## 前後端相關知識學習
