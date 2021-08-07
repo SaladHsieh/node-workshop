@@ -13,4 +13,11 @@ console.log(4);
 asyncF();
 console.log(5);
 
-// 執行順序 4 - () 1 - 5 - 2 - 3 ()
+// 執行順序:
+// asyncF()去background thread處理 -> 
+// 印出4 -> 
+// 執行asyncF() 印出 1, new Promise 去 background thread處裡 -> 
+// 印出5 -> 
+// 清空stack -> 
+// 印出2 -> 
+// 印出3
