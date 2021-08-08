@@ -1,3 +1,9 @@
+const axios = require("axios");
+const moment = require("moment");
+
+// fs讀股票代碼
+const fs = require("fs");
+
 const mysql = require("mysql");
 require("dotenv").config();
 
@@ -17,12 +23,6 @@ connection.connect((err) => {
 
 // 不關閉連線，認為程式一直在執行
 connection.end();
-
-const axios = require("axios");
-const moment = require("moment");
-
-// fs讀股票代碼
-const fs = require("fs");
 
 // console.log(moment().format('YYYYMMDD'));
 
