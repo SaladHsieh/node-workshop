@@ -72,7 +72,7 @@ function queryStockCode(stockCode) {
 function insertStockData(parsedData) {
     return new Promise((resolve, reject) => {
         connection.query(
-            "INSERT INTO IGNORE stock_price (stock_id, date, volume, amount, open_price, high_price, low_price, close_price, delta_price, transactions) VALUES ?", // IGNORE 忽略重複部分
+            "INSERT IGNORE INTO stock_price (stock_id, date, volume, amount, open_price, high_price, low_price, close_price, delta_price, transactions) VALUES ?", // IGNORE 忽略重複部分
             [parsedData],
             function (error, results, fields) {
                 if (error) {
