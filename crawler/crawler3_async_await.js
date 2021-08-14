@@ -1,8 +1,6 @@
 const axios = require("axios");
 const moment = require("moment");
-
-// fs讀股票代碼
-const fs = require("fs");
+const fs = require("fs"); // fs讀股票代碼
 
 // console.log(moment().format('YYYYMMDD'));
 
@@ -14,7 +12,7 @@ function getStockCode() {
                 reject(err);
             } else {
                 resolve(stockCode.trim());
-                // 移除前後空白字元, 包含換行 **收到資料要處理!!很重要!!**
+                // **注意格式**用.trim()移除前後空白字元, 包含換行 **收到資料要處理!!很重要!!**
             }
         });
     });
@@ -25,12 +23,11 @@ function readFile(stockCode) {
         params: {
             response: "json",
             date: moment().format("YYYYMMDD"),
-            stockNo: stockCode, //**注意格式**用.trim()除去空白.換行字元
+            stockNo: stockCode,
         },
     });
 }
 
-// 立即函式前一定要分號區隔
 (async function () {
     try {
         let theStock = await getStockCode();
