@@ -1,0 +1,23 @@
+{
+  "name": "node-workshop",
+  "version": "1.0.0",
+  "description": "date: 2021/7/31~2021/8/1\r ## 介紹：\r * 這個repo主要是我的上課筆記\r * 瞭解如何安裝nvm以及node.js (Mac & Windows)\r * 何為node.js以及其特點\r * 如何執行node.js\r * 同步與非同步 XMLHttpRequest",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaladHsieh/node-workshop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaladHsieh/node-workshop/issues"
+  },
+  "homepage": "https://github.com/SaladHsieh/node-workshop#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
