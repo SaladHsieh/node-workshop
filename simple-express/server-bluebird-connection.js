@@ -1,4 +1,3 @@
-// -------------------------用POOL方式連線---------------------------------
 const { response, request } = require("express");
 const express = require("express");
 const connection = require("./utils/db");
@@ -47,21 +46,8 @@ app.get("/stock", async (request, response, next) => {
     response.json(result);
 })
 
-// :stockCode -> 股票代碼，路徑變為 /stock/2330 
-app.get("/stock/:stockCode", async (req, res, next) => {
-    // 制式寫法(req.params.冒號後面的東西) req.params.stockCode
-    let result = await connection.queryAsync("SELECT * FROM stock_price WHERE stock_id = ?", [req.params.stockCode]);
-    res.json(result);
-});
-
-// 404 放所有路由最下方
-app.use((req, res, next) => {
-    res.status(404).json({ message: "NOT FOUND" });
-});
-
 // web server 啟動時建立資料庫連結
 app.listen(3000, async function () {
-    // 改用 pool 會自動連線
-    // await connection.connectAsync();
+    await connection.connectAsync();
     console.log("我們的 web server 啟動了～");
   });
