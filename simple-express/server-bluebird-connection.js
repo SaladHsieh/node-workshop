@@ -46,7 +46,7 @@ app.get("/stock", async (request, response, next) => {
     response.json(result);
 })
 
-// web server 啟動時建立資料庫連結
+// web server 啟動時建立資料庫連結  
 app.listen(3000, async function () {
     await connection.connectAsync();
     console.log("我們的 web server 啟動了～");

@@ -12,7 +12,7 @@ let connection = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     //設定預設值
-    connectionLimit: process.env.CONNECTION_LIMIT || 10, 
+    connectionLimit: process.env.CONNECTION_LIMIT || 10,
 });
 
 connection = Promise.promisifyAll(connection);

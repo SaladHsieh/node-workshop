@@ -42,15 +42,33 @@ app.get("/about", function (request, response, next) {
 // response.send -> 傳送文字字串
 // response.json -> 傳送json格式
 app.get("/stock", async (request, response, next) => {
-    // 這裡才建立連線，若遇 DDoS ，連 server 都會壞! -> 不要在每次有request時建立連線!
-    let result = await connection.queryAsync("SELECT * FROM stock");
-    response.json(result);
-})
+    try {
+        // 這裡才建立連線，若遇 DDoS ，連 server 都會壞! -> 不要在每次有request時建立連線!
+        let result = await connection.queryAsync("SELECT * FROM stock");
+        response.json(result);
+    } catch (e) {
+        console.error(e);
+    }
+});
 
-// :stockCode -> 股票代碼，路徑變為 /stock/2330 
+// 網址變成 --> /stock/2330?page=1
+// :stockCode -> 股票代碼，路徑變為 /stock/2330
 app.get("/stock/:stockCode", async (req, res, next) => {
-    // 制式寫法(req.params.冒號後面的東西) req.params.stockCode
-    let result = await connection.queryAsync("SELECT * FROM stock_price WHERE stock_id = ?", [req.params.stockCode]);
+    // 制式寫法(req.params.冒號後面的東西) req.params.stockCode --> 取得網址上的參數
+    // req.query.page --> 取得網址上的頁碼 (因為是query String)
+    //let page = req.query.page || 1;  // 目前在第幾頁，預設為第一頁
+
+    // TODO: 1. 取得共有幾筆
+    // await connection.queryAsync(
+    //     'SELECT COUNT (*) AS total FROM stock_price'
+    // )
+
+    // TODO: 2. 一頁有幾筆資料
+
+    let result = await connection.queryAsync(
+        "SELECT * FROM stock_price WHERE stock_id = ?",
+        [req.params.stockCode]
+    );
     res.json(result);
 });
 
@@ -60,8 +78,9 @@ app.use((req, res, next) => {
 });
 
 // web server 啟動時建立資料庫連結
-app.listen(3000, async function () {
+const port = 3002;
+app.listen(port, async function () {
     // 改用 pool 會自動連線
     // await connection.connectAsync();
-    console.log("我們的 web server 啟動了～");
-  });
+    console.log(`我們的 web server: ${port} 啟動了～`);
+});
