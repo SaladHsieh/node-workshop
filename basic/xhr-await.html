@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <title>XHR</title>
+  </head>
+  <body>
+    <button id="syncBtn">同步</button>
+    <button id="asyncBtn">非同步</button>
+    <button id="countBtn">測試按鈕</button>
+    <div id="count">0</div>
+    <div id="response">準備要顯示訊息</div>
+
+    <script>
+      var response = document.getElementById('response');
+      var syncBtn = document.getElementById('syncBtn');
+      syncBtn.addEventListener('click', async function () {
+        // 同步請求，等待期間無法做其他動作 (async await 方式)
+        response.innerText = '開始同步請求';
+
+        response.innerHTML = await new Promise((resolve, reject) => {
+          var xhr = new XMLHttpRequest();
+          xhr.onload = function () {
+            if (this.status === 200) {
+              resolve(`同步請求的response: ${this.responseText}`);
+            } else {
+              reject(`同步請求錯誤: ${this.status}`);
+            }
+          };
+
+          // 請求錯誤時觸發的錯誤事件
+          xhr.onerror = () => {
+            reject(xhr.statusText);
+          };
+
+          // method, url, async(default: true 非同步)
+          // 同步: false
+          // 非同步(異步): true
+          xhr.open('GET', 'http://54.188.216.90:3000/', false);
+          xhr.send();
+        });
+      });
+
+      var asyncBtn = document.getElementById('asyncBtn');
+      asyncBtn.addEventListener('click', async function () {
+        // 非同步請求，等待期間還是可以執行其他工作 (callback 方式)
+        response.innerText = '開始非同步請求';
+
+        response.innerHTML = await new Promise((resolve, reject) => {
+          var xhr = new XMLHttpRequest();
+          xhr.onload = function () {
+            if (this.status === 200) {
+              resolve(`非同步請求的response: ${this.responseText}`);
+            } else {
+              reject(`非同步請求錯誤: ${this.status}`);
+            }
+          };
+
+          // method, url, async(default: true 非同步)
+          // 同步: false
+          // 非同步(異步): true
+          xhr.open('GET', 'http://54.188.216.90:3000/', true);
+          xhr.send();
+        });
+      });
+
+      var countBtn = document.getElementById('countBtn');
+      var count = document.getElementById('count');
+      countBtn.addEventListener('click', function () {
+        count.innerHTML = parseInt(count.innerHTML, 10) + 1;
+      });
+    </script>
+  </body>
+</html>
